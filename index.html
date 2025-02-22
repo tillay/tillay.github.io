@@ -37,9 +37,9 @@
         color: #e0e0e0;
     }
     textarea {
-    height: 150px;
-    resize: vertical;
-}
+        height: 150px;
+        resize: vertical;
+    }
     textarea::placeholder, input::placeholder {
         color: #888;
     }
@@ -69,7 +69,7 @@
 </head>
 <body>
     <div class="container">
-	    <h1>Tildercrypt</h1>
+        <h1>Tildercrypt</h1>
         <textarea id="inputText" placeholder="Enter text to encrypt or decrypt"></textarea>
         <input type="password" id="passphrase" placeholder="Enter passphrase">
         <button onclick="processText()">Do the thing</button>
@@ -103,8 +103,8 @@
         }
 
         function processText() {
-            const inputText = document.getElementById('inputText').value;
-            const passphrase = document.getElementById('passphrase').value;
+            const inputText = document.getElementById('inputText').value.trim(); // Trim whitespace
+            const passphrase = document.getElementById('passphrase').value.trim(); // Trim whitespace
             const outputDiv = document.getElementById('output');
 
             if (inputText.startsWith('&&')) {
@@ -112,7 +112,7 @@
                 if (decryptedText) {
                     outputDiv.textContent = 'Decrypted text: ' + decryptedText;
                 } else {
-                    outputDiv.textContent = 'Decryption failed. incorrect passphrase.';
+                    outputDiv.textContent = 'Decryption failed. Incorrect passphrase.';
                 }
             } else {
                 const encryptedText = '&&' + encrypt(inputText, passphrase);
