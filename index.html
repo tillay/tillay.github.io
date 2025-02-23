@@ -4,68 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tildercrypt</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background-color: #121212;
-        color: #e0e0e0;
-    }
-    .container {
-        margin: 0 auto;
-        padding: 20px;
-        background: #282828;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    h1 {
-        text-align: center;
-        color: #8a2efa;
-    }
-    textarea, input {
-        width: 100%;
-        padding: 10px;
-        margin: 0;
-        border: 1px solid #444;
-        border-radius: 4px;
-        font-size: 16px;
-        box-sizing: border-box;
-        background-color: #383A40;
-        color: #e0e0e0;
-    }
-    textarea {
-        height: 150px;
-        resize: vertical;
-    }
-    textarea::placeholder, input::placeholder {
-        color: #888;
-    }
-    button {
-        padding: 10px;
-        background-color: #9b4afb;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        width: 100%;
-    }
-    button:hover {
-        background-color: #8a2efa;
-    }
-    .output {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #383A40;
-        border: none;
-        border-radius: 4px;                                                                                       
-        white-space: pre-wrap;                                                                                    
-        word-wrap: break-word;                                                                                    
-    }
-</style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            background: #282828;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #8a2efa;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin: 0;
+            border: 1px solid #444;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #383A40;
+            color: #e0e0e0;
+        }
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        textarea::placeholder, input::placeholder {
+            color: #888;
+        }
+        button {
+            padding: 10px;
+            background-color: #9b4afb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #8a2efa;
+        }
+        .output-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .output {
+            flex: 1;
+            padding: 10px;
+            background-color: #383A40;
+            border: none;
+            border-radius: 4px;
+            height: 20px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .copy-button {
+            padding: 10px;
+            background-color: #8a2efa;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            width: 60px;
+            cursor: pointer;
+        }
+        .copy-button:hover {
+            background-color: #9b4afb;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -73,7 +92,10 @@
         <textarea id="inputText" placeholder="Enter text to encrypt or decrypt"></textarea>
         <input type="password" id="passphrase" placeholder="Enter passphrase">
         <button onclick="processText()">Do the thing</button>
-        <div class="output" id="output"></div>
+        <div class="output-container">
+            <div class="output" id="output"></div>
+            <button onclick="copyToClipboard()" class="copy-button">Copy</button>
+        </div>
     </div>
 
     <!-- Include CryptoJS library -->
@@ -103,8 +125,8 @@
         }
 
         function processText() {
-            const inputText = document.getElementById('inputText').value.trim(); // Trim whitespace
-            const passphrase = document.getElementById('passphrase').value.trim(); // Trim whitespace
+            const inputText = document.getElementById('inputText').value.trim();
+            const passphrase = document.getElementById('passphrase').value.trim();
             const outputDiv = document.getElementById('output');
 
             if (inputText.startsWith('&&')) {
@@ -119,6 +141,32 @@
                 outputDiv.textContent = encryptedText;
             }
         }
+
+        function copyToClipboard() {
+            const outputDiv = document.getElementById('output');
+            const textToCopy = outputDiv.textContent;
+
+            if (textToCopy) {
+                navigator.clipboard.writeText(textToCopy)
+                    .catch(() => {
+                        alert('Failed to copy text.');
+                    });
+            }
+        }
+
+        document.getElementById('inputText').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                processText();
+            }
+        });
+
+        document.getElementById('passphrase').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                processText();
+            }
+        });
     </script>
 </body>
 </html>
