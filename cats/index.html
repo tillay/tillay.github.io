@@ -12,7 +12,7 @@
             color: #e0e0e0;
         }
         h1 {
-            color: #8A2EFA; /* Title color */
+            color: #8A2EFA;
             text-align: center;
         }
         .container {
@@ -29,15 +29,12 @@
             position: relative;
             overflow: hidden;
             border-radius: 4px;
+            cursor: pointer;
         }
         .image-container img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .image-container:hover img {
-            transform: scale(1.1);
         }
         .caption {
             background-color: rgba(0, 0, 0, 0.7);
@@ -45,37 +42,55 @@
             padding: 10px;
             font-size: 14px;
             text-align: center;
-            border-radius: 0 0 4px 4px; /* Rounded corners at the bottom */
+            border-radius: 0 0 4px 4px;
         }
     </style>
 </head>
 <body>
-    <h1>My cat Figgie</h1> <!-- Title added here -->
+    <h1>My cat Figgie</h1>
     <div class="container">
-        <div class="image-container">
+        <div class="image-container" onclick="openFullscreen('https://tilley.lol/cats/figgie.png')">
             <img src="https://tilley.lol/cats/figgie.png" alt="Cat 1">
             <div class="caption">figgie hacking matrix</div>
         </div>
-        <div class="image-container">
+        <div class="image-container" onclick="openFullscreen('https://tilley.lol/cats/computerfiggie.jpg')">
             <img src="https://tilley.lol/cats/computerfiggie.jpg" alt="Cat 2">
             <div class="caption">figgie on computer</div>
         </div>
-        <div class="image-container">
+        <div class="image-container" onclick="openFullscreen('https://tilley.lol/cats/closetfiggie.jpg')">
             <img src="https://tilley.lol/cats/closetfiggie.jpg" alt="Cat 3">
             <div class="caption">Figgie in my bookshelf</div>
         </div>
-        <div class="image-container">
+        <div class="image-container" onclick="openFullscreen('https://tilley.lol/cats/toungeoutfiggie.png')">
             <img src="https://tilley.lol/cats/toungeoutfiggie.png" alt="Cat 4">
             <div class="caption">figgie being silly</div>
         </div>
-        <div class="image-container">
+        <div class="image-container" onclick="openFullscreen('https://tilley.lol/cats/loaffiggie.jpg')">
             <img src="https://tilley.lol/cats/loaffiggie.jpg" alt="Cat 5">
             <div class="caption">figgie in loaf mode</div>
         </div>
-        <div class="image-container">
+        <div class="image-container" onclick="openFullscreen('https://tilley.lol/cats/naturefiggie.jpg')">
             <img src="https://tilley.lol/cats/naturefiggie.jpg" alt="Cat 6">
             <div class="caption">figgie in nature</div>
         </div>
     </div>
+    <script>
+        function openFullscreen(imageUrl) {
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.position = 'fixed';
+            img.style.top = '0';
+            img.style.left = '0';
+            img.style.zIndex = '9999';
+            img.style.objectFit = 'contain';
+            img.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            img.onclick = function() {
+                document.body.removeChild(img);
+            };
+            document.body.appendChild(img);
+        }
+    </script>
 </body>
 </html>
