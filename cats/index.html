@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            background: #282828;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 20px;
+        }
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .image-container img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+        .image-container .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #e0e0e0;
+            padding: 10px;
+            font-size: 14px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <?php
+            $directory = '.';
+            $files = scandir($directory);
+            foreach ($files as $file) {
+                if (is_file($file) && in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), array('jpg', 'jpeg', 'png', 'gif'))) {
+                    echo '<div class="image-container">';
+                    echo '<img src="' . $file . '" alt="' . pathinfo($file, PATHINFO_FILENAME) . '">';
+                    echo '<div class="caption">' . pathinfo($file, PATHINFO_FILENAME) . '</div>';
+                    echo '</div>';
+                }
+            }
+        ?>
+    </div>
+</body>
+</html>
