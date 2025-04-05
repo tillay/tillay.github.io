@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
+    <title>Cat Pics</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,18 +53,26 @@
 </head>
 <body>
     <div class="container">
-        <?php
-            $directory = '.';
-            $files = scandir($directory);
-            foreach ($files as $file) {
-                if (is_file($file) && in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), array('jpg', 'jpeg', 'png', 'gif'))) {
-                    echo '<div class="image-container">';
-                    echo '<img src="' . $file . '" alt="' . pathinfo($file, PATHINFO_FILENAME) . '">';
-                    echo '<div class="caption">' . pathinfo($file, PATHINFO_FILENAME) . '</div>';
-                    echo '</div>';
-                }
-            }
-        ?>
+        <div class="image-container">
+            <img src="cats/figgie.png" alt="Cat 1">
+            <div class="caption">figgie hacking matrix</div>
+        </div>
+        <div class="image-container">
+            <img src="cats/computerfiggie.jpg" alt="Cat 2">
+            <div class="caption">figgie on computer</div>
+        </div>
+        <div class="image-container">
+            <img src="cats/closetfiggie.jpg" alt="Cat 3">
+            <div class="caption">Figgie in my bookshelf</div>
+        </div>
+        <div class="image-container">
+            <img src="cats/toungeoutfiggie.png" alt="Cat 4">
+            <div class="caption">figgie being silly</div>
+        </div>
+        <div class="image-container">
+            <img src="cats/loaffiggie.jpg" alt="Cat 5">
+            <div class="caption">figgie in loaf mode</div>
+        </div>
     </div>
 </body>
 </html>
