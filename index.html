@@ -1,136 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Tillie</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tildercrypt</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background-color: #121212;
-        color: #e0e0e0;
-    }
-    .container {
-        margin: 0 auto;
-        padding: 20px;
-        background: #282828;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    h1 {
-        text-align: center;
-        color: #8a2efa;
-    }
-    textarea, input {
-        width: 100%;
-        padding: 10px;
-        margin: 0;
-        border: 1px solid #444;
-        border-radius: 4px;
-        font-size: 16px;
-        box-sizing: border-box;
-        background-color: #383A40;
-        color: #e0e0e0;
-    }
-    textarea {
-        height: 150px;
-        resize: vertical;
-    }
-    textarea::placeholder, input::placeholder {
-        color: #888;
-    }
-    button {
-        padding: 10px;
-        background-color: #9b4afb;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        width: 100%;
-    }
-    button:hover {
-        background-color: #8a2efa;
-    }
-    .output {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #383A40;
-        border: none;
-        border-radius: 4px;                                                                                       
-        white-space: pre-wrap;                                                                                    
-        word-wrap: break-word;                                                                                    
-    }
-</style>
+    <meta name="title" content="tilley">
+    <meta name="description" content="Tilley's Personal Website">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tilley.lol/">
+    <meta property="og:title" content="eee">
+    <meta property="og:description" content="Personal website of patch">
+    <meta property="og:image" content="img/banner.png">
+    <meta property="twitter:card" content="assets/banner.png">
+    <meta property="twitter:url" content="https://tilley.lol/">
+    <meta property="twitter:title" content="Tilley's Personal Website">
+    <meta property="twitter:description" content="Tilley's Personal Website">
+    <meta property="twitter:image" content="img/banner.png">
+    <link rel="stylesheet" href="assets/materialize.min.css">
+    <link rel="stylesheet" href="assets/material.icons.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favion.ico">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Tildercrypt</h1>
-        <textarea id="inputText" placeholder="Enter text to encrypt or decrypt"></textarea>
-        <input type="password" id="passphrase" placeholder="Enter passphrase">
-        <button onclick="processText()">Do the thing</button>
-        <div class="output" id="output"></div>
+    <div id="tsparticles"></div>
+
+    <div class="card-wrapper">
+        <div class="card">
+            <div class="left-section">
+                <div class="card-image">
+                    <img src="https://cdn.discordapp.com/avatars/1239747535120236616/df9d110fa7a3e5f4d3a947088d5d8094?size=1024" alt="tillay8">
+                </div>
+                <div class="card-content">
+                    <h5>tilley</h5>
+                    <p>・I am currently in 11th Grade</p>
+                    <p>・I love cats!</p>
+                    <p>・I write in Python and C</p>
+                    <p>・I Speak German and English</p>
+                    <p>・I use Garuda Linux and QubesOS</p>
+                    <p>・I live in Boulder, Colorado, USA</p>
+                </div>
+            </div>
+
+            <!-- Right Section (Links) -->
+            <div class="right-section">
+                <h6>Links</h6>
+                <div class="card-action">
+                    <a href="https://tilley.lol" target="_blank"><i class="material-icons">public</i>tilley.lol</a>
+                    <a href="https://tilley.lol/cats" target="_blank"><i class="material-icons">pets</i>cat pictures</a>
+                    <a href="https://tilley.lol/dotfiles" target="_blank"><i class="material-icons">screenshot_monitor</i>dotfiles</a>
+                    <a href="https://discord.com/users/1239747535120236616" target="_blank"><i class="material-icons">discord</i>Discord</a>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1333247177606299661" target="_blank"><i class="material-icons">map</i>Mazes</a>
+                    <a href="http://73.229.135.222/" rel="me" target="_blank"><i class="material-icons">storage</i>Home Server</a>
+                    <a href="https://steamcommunity.com/profiles/76561199445797525" target="_blank"><i class="material-icons">sports_esports</i>Steam</a>
+                    <a href="http://73.229.135.222/music" target="_blank"><i class="material-icons">music_note</i>Music</a>
+                    <a href="https://cdn.patchli.fr/keys/public_ssh.txt" target="_blank"><i class="material-icons">key</i>Public Keys</a>
+                    <a href="https://github.com/tillay8/tillay8.github.io" target="_blank"><i class="material-icons">source</i>Site Source Code</a>
+                    <a href="https://tilley.lol/encrypt" target="_blank"><i class="material-icons">lock</i>Tildercrypt</a>
+                    <a href="https://github.com/tillay8" target="_blank"><i class="material-icons">code</i>GitHub</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Include CryptoJS library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-    <script>
-        const KEY = '';
-
-        function encrypt(plaintext, passphrase) {
-            const key = CryptoJS.SHA256(passphrase + KEY);
-            const iv = CryptoJS.lib.WordArray.random(16);
-            const encrypted = CryptoJS.AES.encrypt(plaintext, key, { iv });
-            return CryptoJS.enc.Base64.stringify(iv.concat(encrypted.ciphertext));
-        }
-
-        function decrypt(ciphertext, passphrase) {
-            try {
-                const decoded = CryptoJS.enc.Base64.parse(ciphertext);
-                const iv = CryptoJS.lib.WordArray.create(decoded.words.slice(0, 4));
-                const encryptedText = CryptoJS.lib.WordArray.create(decoded.words.slice(4));
-                const key = CryptoJS.SHA256(passphrase + KEY);
-                const decrypted = CryptoJS.AES.decrypt({ ciphertext: encryptedText }, key, { iv });
-                return decrypted.toString(CryptoJS.enc.Utf8);
-            } catch (error) {
-                return null;
-            }
-        }
-
-        function processText() {
-            const inputText = document.getElementById('inputText').value.trim();
-            const outputDiv = document.getElementById('output');
-
-            if (inputText.startsWith('&&')) {
-                const decryptedText = decrypt(inputText.slice(2), passphrase);
-                if (decryptedText) {
-                    outputDiv.textContent = 'Decrypted text: ' + decryptedText;
-                } else {
-                    outputDiv.textContent = 'Decryption failed. Incorrect passphrase.';
-                }
-            } else {
-                const encryptedText = '&&' + encrypt(inputText, passphrase);
-                outputDiv.textContent = encryptedText;
-            }
-        }
-        document.getElementById('inputText').addEventListener('keydown', function (event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                processText();
-            }
-        });
-
-        document.getElementById('passphrase').addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                processText();
-            }
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="assets/scripts/materialize.min.js"></script>
+    <script src="assets/scripts/tsparticles.js"></script>
+    <script src="assets/scripts/script.js"></script>
 </body>
 </html>
+
+<!-- Particles parts based on : https://codepen.io/YamiHirozawa/pen/bGJQrgj -->
