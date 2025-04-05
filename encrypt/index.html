@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tildercrypt</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    .container {
+        margin: 0 auto;
+        padding: 20px;
+        background: #282828;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    h1 {
+        text-align: center;
+        color: #8a2efa;
+    }
+    textarea, input {
+        width: 100%;
+        padding: 10px;
+        margin: 0;
+        border: 1px solid #444;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+        background-color: #383A40;
+        color: #e0e0e0;
+    }
+    textarea {
+        height: 150px;
+        resize: vertical;
+    }
+    textarea::placeholder, input::placeholder {
+        color: #888;
+    }
+    button {
+        padding: 10px;
+        background-color: #9b4afb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+    }
+    button:hover {
+        background-color: #8a2efa;
+    }
+    .output {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #383A40;
+        border: none;
+        border-radius: 4px;                                                                                       
+        white-space: pre-wrap;                                                                                    
+        word-wrap: break-word;                                                                                    
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tildercrypt</h1>
+        <textarea id="inputText" placeholder="Enter text to encrypt or decrypt"></textarea>
+        <input type="password" id="passphrase" placeholder="Enter passphrase">
+        <button onclick="processText()">Do the thing</button>
+        <div class="output" id="output"></div>
+    </div>
+
+    <!-- Include CryptoJS library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <script>
+        const KEY = '';
+
+        function encrypt(plaintext, passphrase) {
+            const key = CryptoJS.SHA256(passphrase + KEY);
+            const iv = CryptoJS.lib.WordArray.random(16);
+            const encrypted = CryptoJS.AES.encrypt(plaintext, key, { iv });
+            return CryptoJS.enc.Base64.stringify(iv.concat(encrypted.ciphertext));
+        }
+
+        function decrypt(ciphertext, passphrase) {
+            try {
+                const decoded = CryptoJS.enc.Base64.parse(ciphertext);
+                const iv = CryptoJS.lib.WordArray.create(decoded.words.slice(0, 4));
+                const encryptedText = CryptoJS.lib.WordArray.create(decoded.words.slice(4));
+                const key = CryptoJS.SHA256(passphrase + KEY);
+                const decrypted = CryptoJS.AES.decrypt({ ciphertext: encryptedText }, key, { iv });
+                return decrypted.toString(CryptoJS.enc.Utf8);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function processText() {
+            const inputText = document.getElementById('inputText').value.trim();
+            const outputDiv = document.getElementById('output');
+
+            if (inputText.startsWith('&&')) {
+                const decryptedText = decrypt(inputText.slice(2), passphrase);
+                if (decryptedText) {
+                    outputDiv.textContent = 'Decrypted text: ' + decryptedText;
+                } else {
+                    outputDiv.textContent = 'Decryption failed. Incorrect passphrase.';
+                }
+            } else {
+                const encryptedText = '&&' + encrypt(inputText, passphrase);
+                outputDiv.textContent = encryptedText;
+            }
+        }
+        document.getElementById('inputText').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                processText();
+            }
+        });
+
+        document.getElementById('passphrase').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                processText();
+            }
+        });
+    </script>
+</body>
+</html>
