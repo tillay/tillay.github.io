@@ -3,25 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maze Generator</title>
+    <title>Tilley's Maze</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #e0e0e0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            background: #282828;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #8a2efa;
+            margin-top: 0;
+        }
+        .canvas-container {
+            background-color: #383A40;
+            padding: 15px;
+            border-radius: 6px;
         }
         canvas {
-            border: 1px solid #333;
+            display: block;
+            border: 1px solid #444;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #9b4afb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #8a2efa;
+        }
+        .footer {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <canvas id="mazeCanvas"></canvas>
+    <div class="container">
+        <h1>Tilley's Maze Generator</h1>
+        <div class="canvas-container">
+            <canvas id="mazeCanvas"></canvas>
+        </div>
+        <button id="regenerateBtn">Generate New Maze</button>
+        <a href="https://discord.com/oauth2/authorize?client_id=1333247177606299661" target="_blank">
+            <button>Discord Bot</button>
+        </a>
+    </div>
 
     <script>
         const SIDE = 0;
@@ -109,18 +158,19 @@
         }
 
         function drawMaze(field, W, H, scale) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let y = 0; y < H + 2; y++) {
                 for (let x = 0; x < W + 2; x++) {
                     let color;
                     if (x === 0 || y === 0 || x === W + 1 || y === H + 1) {
-                        color = "#000000";
+                        color = "#1a1a1a";
                     } else if (x === 1 && y === 1) {
                         color = "#FF0000";
                     } else if (x === W && y === H) {
-                        color = "#0000FF";
+                        color = "#0088FF";
                     } else {
                         const val = field[(x - 1) + (y - 1) * W];
-                        color = val === 0 ? "#000000" : "#FFFFFF";
+                        color = val === 0 ? "#1a1a1a" : "#e0e0e0";
                     }
 
                     ctx.fillStyle = color;
@@ -135,6 +185,7 @@
             drawMaze(field, W, H, SCALE);
         }
 
+        document.getElementById('regenerateBtn').addEventListener('click', generateMaze);
         window.onload = generateMaze;
     </script>
 </body>
