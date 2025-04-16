@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Maze PNG</title>
+  <title>Maze Generator</title>
   <style>
     body, html {
       margin: 0;
@@ -9,22 +9,24 @@
       overflow: hidden;
       background-color: transparent;
     }
+    canvas {
+      display: block;
+    }
   </style>
 </head>
 <body>
-  <canvas id="mazeCanvas" style="display:none;"></canvas>
+  <canvas id="mazeCanvas"></canvas>
   
   <script src="maze.js"></script>
   <script>
-    const canvas = document.getElementById('mazeCanvas');
-    
-    function redirectToImageData() {
+    window.onload = function() {
       generateMaze();
-      const imageData = canvas.toDataURL('image/png');
-      window.location.replace(imageData);
-    }
-    
-    window.onload = redirectToImageData;
+      const imageDataURL = canvas.toDataURL('image/png');
+      canvas.style.display = 'none';
+      const img = new Image();
+      img.src = imageDataURL;
+      document.body.appendChild(img);
+    };
   </script>
 </body>
 </html>
