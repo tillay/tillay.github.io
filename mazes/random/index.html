@@ -19,13 +19,18 @@
   
   <script src="maze.js"></script>
   <script>
-    window.onload = function() {
-      generateMaze();
+    function convertCanvasToPng() {
       const imageDataURL = canvas.toDataURL('image/png');
       canvas.style.display = 'none';
+      
       const img = new Image();
       img.src = imageDataURL;
       document.body.appendChild(img);
+    }
+    
+    window.onload = function() {
+      generateMaze();
+      convertCanvasToPng();
     };
   </script>
 </body>
