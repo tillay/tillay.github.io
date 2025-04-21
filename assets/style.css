@@ -48,8 +48,7 @@ textarea {
     width: 150px !important;   
     height: 150px !important;  
     object-fit: cover; 
-    /* border-radius: 50% !important; */
-    border-raduis: 2% !important;
+    border-radius: 50% !important;
     margin-bottom: 20px; 
 }
 
