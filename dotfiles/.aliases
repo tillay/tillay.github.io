@@ -1,0 +1,67 @@
+alias ydl='yt-dlp $1 -x --no-playlist --cookies-from-browser firefox --audio-format mp3 -o "/home/$USER/Music/%(title)s.%(ext)s"'
+function vol {
+amixer -D pulse sset Master unmute > /dev/null
+amixer -D pulse sset Master $1% > /dev/null
+}
+function roll-mac {
+sudo ip link set dev wlan0 down
+sudo macchanger -r wlan0
+sudo ip link set dev wlan0 up
+}
+alias ccat='highlight -O ansi --force'
+function swap()
+{
+    touch $1 $2
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
+}
+function shuffle()
+{
+while true; do
+file=$(find ~/Music -type f | shuf -n 1)
+toastify send "$file"
+mpv "$file"
+echo "$file" >> ~/Music/plays
+done
+}
+function repet()
+{
+while true; do
+mpv $1
+echo $1 >> ~/Music/plays
+done
+}
+alias wbar='killall $SIGUSR2 waybar&&waybar&disown'
+function nuraudio(){
+ffmpeg -i "$1" -vn -ar 44100 -ac 2 -ab 192k -f mp3 "${1%.*}.mp3" > /dev/null
+rm $1
+}
+function iploc(){
+curl -s "https://ipinfo.io/$1/json" | jq .
+}
+function qube(){
+cd ~/vms/$1
+vagrant up
+ssh -X -p $(vagrant ssh-config | grep Port | cut -c 8-11) -i ./.vagrant/machines/default/virtualbox/private_key vagrant@127.0.0.1
+cd -
+}
+siteloc() {
+ip=$(dig +short $1 | head -n 1);
+curl -s "https://ipinfo.io/$ip/json" | jq .
+}
+alias copy='wl-copy'
+alias clipto='wl-paste | cat >'
+alias yoink='wget --mirror -p --convert-links'
+alias neofetch='fastfetch'
+alias eogclip='wl-paste | cat > ~/clipboard.png&&eog ~/clipboard.png&&rm ~/clipboard.png'
+murder() {
+while [ $(stat -c%s $1) -gt 0 ]; do
+    size=$(stat -c%s $1)
+    new_size=$(( size - $2 ))
+    if [ $new_size -lt 0 ]; then
+        new_size=0
+    fi
+    truncate -s $new_size $1
+    sleep 0.01
+done
+}
