@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+h1 {
+    color: #8A2EFA;
+    text-align: center;
+}
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    background: #282828;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    grid-gap: 20px;
+}
+.image-container {
+    border-radius: 4px;
+    overflow: hidden;
+}
+.image-container a {
+    text-decoration: none;
+    color: inherit;
+}
+.image-container img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.caption {
+    background: rgba(0,0,0,0.7);
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 0 0 4px 4px;
+}
+</style>
+</head>
+<body>
+<h1>My Projects</h1>
+<div class="container">
+    <div class="image-container">
+        <a href="https://github.com/tillay/maze-bot" target="_blank">
+            <img src="https://tilley.lol/projects/mazebot.png" alt="mazes">
+            <div class="caption">mazes</div>
+        </a>
+    </div>
+    <div class="image-container">
+        <a href="https://github.com/tillay/zsh-wrapped" target="_blank">
+            <img src="https://tilley.lol/projects/wrapped.png" alt="zsh wrapped">
+            <div class="caption">zsh wrapped</div>
+        </a>
+    </div>
+    <div class="image-container">
+        <a href="https://github.com/tillay/uno" target="_blank">
+            <img src="https://tilley.lol/projects/uno.png" alt="cli uno">
+            <div class="caption">cli uno game</div>
+        </a>
+    </div>
+    <div class="image-container">
+        <a href="https://github.com/tillay/kudasai" target="_blank">
+            <img src="https://tilley.lol/projects/marin.png" alt="usb sound effects">
+            <div class="caption">usb sound effects</div>
+        </a>
+    </div>
+    <div class="image-container">
+        <a href="https://github.com/tillay/tillay.github.io" target="_blank">
+            <img src="https://tilley.lol/projects/tilleylol.png" alt="this website">
+            <div class="caption">this website</div>
+        </a>
+    </div>
+</div>
+</body>
+</html>
