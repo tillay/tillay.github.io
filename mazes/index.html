@@ -16,74 +16,15 @@
 	<meta property="twitter:title" content="Tilley's Mazes">
 	<meta property="twitter:description" content="">
 	<meta property="twitter:image" content="https://tilley.lol/mazes/maze.png">
-    <link rel="icon" href="assets/img/favicon.png" type="image/png">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #121212;
-            color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            margin: 0 auto;
-            padding: 20px;
-            background: #282828;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #8a2efa;
-            margin-top: 0;
-        }
-        .canvas-container {
-            background-color: #383A40;
-            padding: 15px;
-            border-radius: 6px;
-        }
-        canvas {
-            display: block;
-            border: 1px solid #444;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #9b4afb;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #8a2efa;
-        }
-        .footer {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #888;
-        }
-    </style>
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/standard-pages.css">
+    <style>body {display: flex;}</style>
 </head>
 <body>
 <div class="container">
     <h1>Tilley's Maze Generator</h1>
     <div class="canvas-container">
         <canvas id="mazeCanvas"></canvas>
-    </div>
-    <div class="button-container">
-        <button id="regenerateBtn">Generate New Maze</button>
-        <a href="https://discord.com/oauth2/authorize?client_id=1333247177606299661" target="_blank">
-            <button>Discord Bot Link</button>
-        </a>
     </div>
 </div>
 

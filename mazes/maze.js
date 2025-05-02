@@ -110,5 +110,5 @@ function generateMaze() {
     drawMaze(field, W, H, SCALE);
 }
 
-document.getElementById('regenerateBtn').addEventListener('click', generateMaze);
+document.getElementById('mazeCanvas').addEventListener('click', generateMaze);
 window.onload = generateMaze;

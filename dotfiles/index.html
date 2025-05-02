@@ -21,54 +21,8 @@
 
     <link rel="icon" href="https://gitlab.com/uploads/-/system/project/avatar/39301337/garuda-hyprland.png" type="image/png">
     <title>Dotfiles</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        h1 {
-            color: #8A2EFA;
-            text-align: center;
-        }
-        .container {
-            margin: 0 auto;
-            padding: 20px;
-            background: #282828;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 60%;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            grid-gap: 20px;
-        }
-        .image-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .image-container img {
-            width: 100%;
-            object-fit: cover;
-        }
-        button {
-            padding-left: 40px;
-            padding-right: 40px;
-            background-color: #9b4afb;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            top: 10px;
-            right: 10px;
-        }
-        button:hover {
-            background-color: #8a2efa;
-        }
+    <link rel="stylesheet" href="/css/standard-pages.css">
 
-    </style>
 </head>
 <body>
     <h1>My Garuda Linux Dotfiles</h1>
@@ -84,13 +38,7 @@
         </a>
 	<a href="https://raw.githubusercontent.com/tillay8/tillay8.github.io/refs/heads/main/dotfiles/.aliases" target="_blank">
             <button>Download aliases</button>
-        </a>
-        <h3>Instructions to install:</h3>
-        <p>1. Download the ZIP File</p>
-        <p>2. Open it to get dotfiles folder</p>
-        <p>3. cd into dotfiles/.config and cp -r directories for the configs of mine you want</p>
-        <p>4. cp the .zshrc and .aliases into your home directory</p>
-        <p>5. run setup_zsh to get my fancy shell</p>
+    </a>
     </div>
 
 </body>

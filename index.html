@@ -20,10 +20,10 @@
 	<meta property="twitter:description" content="">
 	<meta property="twitter:image" content="https://tilley.lol/assets/img/maho.png">
 
-    <link rel="stylesheet" href="assets/materialize.min.css">
-    <link rel="stylesheet" href="assets/material.icons.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/material.icons.css">
     <link rel="icon" href="assets/img/favicon.png" type="image/png">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
     <div id="tsparticles"></div>
@@ -33,7 +33,6 @@
             <div class="left-section">
                 <div class="card-image">
                     <img src="assets/img/favicon.png" alt="tillay8">
-		    <!-- <img src="assets/me.png" alt="picture by stigl"> -->
                 </div>
                 <div class="card-content">
                     <h5>tilley</h5>
@@ -50,27 +49,50 @@
                 <h6>Links</h6>
                 <div class="card-action">
                     <a href="https://tilley.lol" target="_blank"><i class="material-icons">public</i>tilley.lol</a>
-                    <a href="https://tilley.lol/cats" target="_blank"><i class="material-icons">pets</i>cat pictures</a>
-                    <a href="https://tilley.lol/dotfiles" target="_blank"><i class="material-icons">screenshot_monitor</i>dotfiles</a>
+                    <a href="cats" target="_blank"><i class="material-icons">pets</i>cat pictures</a>
+                    <a href="dotfiles" target="_blank"><i class="material-icons">screenshot_monitor</i>dotfiles</a>
                     <a href="https://discord.com/users/1239747535120236616" target="_blank"><i class="material-icons">discord</i>Discord</a>
-                    <a href="https://tilley.lol/mazes" target="_blank"><i class="material-icons">map</i>Mazes</a>
-                    <a href="https://tilley.lol/projects" rel="me" target="_blank"><i class="material-icons">storage</i>Projects</a>
+                    <a href="mazes" target="_blank"><i class="material-icons">map</i>Mazes</a>
+                    <a href="projects" rel="me" target="_blank"><i class="material-icons">storage</i>Projects</a>
                     <a href="https://steamcommunity.com/profiles/76561199445797525" target="_blank"><i class="material-icons">sports_esports</i>Steam</a>
-                    <!-- <a href="https://tilley.lol/music" target="_blank"><i class="material-icons">music_note</i>Music</a> -->
-                    <a href="https://tilley.lol/keys" target="_blank"><i class="material-icons">key</i>Public Keys</a>
                     <a href="https://github.com/tillay/tillay.github.io" target="_blank"><i class="material-icons">source</i>Site Source Code</a>
-                    <a href="https://tilley.lol/encrypt" target="_blank"><i class="material-icons">lock</i>Tildercrypt</a>
+                    <a href="encrypt" target="_blank"><i class="material-icons">lock</i>Tildercrypt</a>
                     <a href="https://github.com/tillay" target="_blank"><i class="material-icons">code</i>GitHub</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/scripts/materialize.min.js"></script>
-    <script src="assets/scripts/tsparticles.js"></script>
-    <script src="assets/scripts/script.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/tsparticles.js"></script>
+
+    <script>
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            particles: {
+                number: {
+                    value: 400
+                },
+                color: {
+                    value: "#892EFA"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5
+                },
+                size: {
+                    value: { min: 4, max: 8 }
+                },
+                move: {
+                    enable: true,
+                    speed: 1.2,
+                    direction: "none",
+                    outModes: "out"
+                }
+            }
+        });
+    </script>
 </body>
 </html>
-
-<!-- Particles parts based on : https://codepen.io/YamiHirozawa/pen/bGJQrgj -->
