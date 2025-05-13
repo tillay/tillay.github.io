@@ -12,7 +12,7 @@ body, html {
     width: 100%;
     overflow: hidden;
     background-color: black;
-    color: #ffffff;
+    color: #e0dbdb;
     font-family: monospace;
     font-size: 14px;
     line-height: 1.2;
@@ -25,9 +25,7 @@ body, html {
     box-sizing: border-box;
     position: relative;
 }
-.console:focus {
-    outline: none;
-}
+
 .console-input {
     position: absolute;
     opacity: 0;
@@ -38,7 +36,7 @@ body, html {
     display: inline-block;
     width: 8px;
     height: 2px;
-    background-color: #ffffff;
+    background-color: #e0dbdb;
     animation: blink 1s infinite;
     vertical-align: bottom;
 }
@@ -56,7 +54,6 @@ body, html {
 <input type="text" class="console-input" id="console-input">
 
 <script>
-const consoleElement = document.getElementById('console');
 const consoleInput = document.getElementById('console-input');
 const userText = document.getElementById('user-text');
 const outputElement = document.getElementById('output');
@@ -66,16 +63,15 @@ function addLine(text) {
     const line = document.createElement('div');
     line.textContent = text;
     outputElement.appendChild(line);
-    consoleElement.scrollTop = consoleElement.scrollHeight;
 }
 
 function addPrompt(text) {
     currentPromptElement.textContent = text;
     userText.textContent = '';
-    consoleElement.scrollTop = consoleElement.scrollHeight;
 }
 
 window.addEventListener('load', () => {
+    document.body.style.cursor = "none";
     addLine("error: no such partition.");
     addLine("Entering rescue mode...");
     addPrompt("grub rescue> ");
@@ -107,17 +103,25 @@ consoleInput.addEventListener('keydown', e => {
                 addLine("(hd0) (hd0,gpt1) (hd0,gpt2) (hd0,gpt3)");
             }
             else {
-                if (command.split(" ")[1].includes("gpt")) {
-                    addLine(command.split(" ")[1]+": no known filesystem detected on partition");
-                }
-                else {
-                    addLine("no such partition: " + command.split(" ")[1])
+                arg = command.split(" ")[1]
+
+                const responses = {
+                    "gpt1": "Partition hd0,1: No known filesystem detected",
+                    "gpt2": "bin  boot  dev  etc  lib  lib64  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var",
+                    "gpt3": "home"
+                };
+                if (responses.hasOwnProperty(arg)) {
+                    addLine(responses[arg]);
                 }
             }
             break;
 
         case "help":
-            addLine("insmod ls set unset help");
+            addLine("bailing out, you are on your own. good luck.");
+            break;
+
+        case "reboot":
+            location.reload();
             break;
 
         case "":
@@ -133,9 +137,6 @@ consoleInput.addEventListener('keydown', e => {
     }
 });
 
-setInterval(() => {
-    consoleInput.focus();
-}, 100);
 </script>
 </body>
 </html>
