@@ -85,7 +85,8 @@ function addPrompt(text) {
 
 window.addEventListener('load', () => {
     document.body.style.cursor = "none";
-    addLine("error: no such partition.");
+    const errors = ["no such partition", "filesystem not found", "unknown filesystem", "symbol 'grub' not found", "disk 'hd0' not found", "unable to decrypt filesystem", "bootloader not found"]
+    addLine("error: " + errors[Math.floor(Math.random() * errors.length)] + ".");
     addLine("Entering rescue mode...");
     addPrompt("grub rescue> ");
     consoleInput.focus();
@@ -125,6 +126,9 @@ consoleInput.addEventListener('keydown', e => {
                 };
                 if (responses.hasOwnProperty(arg)) {
                     addLine(responses[arg]);
+                }
+                else {
+                    addLine("no such file or directory: " + arg)
                 }
             }
             break;
